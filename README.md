@@ -1,0 +1,14 @@
+# ClassifyReceptorResponse
+
+Exploring how classification methods can augment insights from experimental data. Here, cells were treated with either vehicle(s) or drugs, and cellular responses were measured resulting from these treatments. Treatments assessed the effect of drug A using selective antagonists to 2 possible pathways (de-activates one or the other pathway), or using another pathway-specific agonist to selectively activite a specific pathway. Treatment combinations therefore resulted in 4 distinct groups:
+
+- No signalling (vehicle)
+- Pathway 1 + Pathway 2 (drug A)
+- Pathway 1 only (drug B or drug A + pathway 2 antagonist)
+- Pathway 2 only (drug A + pathway 1 antagonist)
+
+At least 4 distinct concurrent measures of cellular response were measured for each experimental condition, but on limited number of trials, therefore generating a wide dataset. 
+
+In traditional frequentist statistics used in my field, each measure would be separated as a distinct dependent variable, and there will be varying statistical tests applied to combinations of groups. In other words, for measure 1, I may choose to only compare vehicle with drug A, and drug B, then in another test, I can choose to compare drug A effects with the presence of antagonists (1 or 2). I may choose, in this framework, to use ANOVAs, and apply a post-hoc test with Tukey's modification. This is generally acceptable in my field given the dataset and experimental design. A better way may be to construct each of these effects using linear mixed models to account for fixed effects according to each experimental trial (since it is a repeated measure for each treatment, they should theoretically share a variance). However, can we get more out of the dataset? What about possible relationships between each measure? Since they were all concurrent measures from the same experiment, there is a high likelihood of them NOT being independent from each other. This is like expecting independence between a given person's abilities in running and jumping. 
+
+So, what happens when you turn the question around? Given the full dataset, with all measures and trials, can I use it to predict which groups these concurrent cellular responsese belonged to? Here, instead of classifying it as effect of drug A, antagonist 1.. etc., I classified it as above, 4 different groups to do with signalling properties, because at the end of the day, I am more interested in which singalling pathway is active, not the individual drug effects. This then transforms the problem into a classification problem, and I am assessing if there are meaninful clusters within the dataset as a result of these cell signalling activities. To visualise this, I chose to use PCA to project the datapoints onto 2 principal components. As for classification, I chose to use SVM with a radial kernel, which gave me a good training accuracy. The plan now is to generate new data for testing.. 
